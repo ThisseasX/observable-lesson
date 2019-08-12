@@ -46,9 +46,15 @@ const scan = (reducer, initialValue) => stream$ =>
     );
   });
 
+const tap = sideEffect => stream$ => {
+  stream$.subscribe(v => sideEffect(v));
+  return stream$;
+};
+
 module.exports = {
   map,
   filter,
   reduce,
   scan,
+  tap,
 };

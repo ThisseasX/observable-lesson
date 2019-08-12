@@ -4,6 +4,7 @@ const {
   filter,
   reduce,
   scan,
+  tap,
 } = require('./operators');
 
 zip(
@@ -12,9 +13,11 @@ zip(
   of(1, 2, 3, 4)
 )
   .pipe(
-    map(([a, b]) => [a, b * 2]),
-    filter(([, b]) => b > 0),
-    scan((total, [,value]) => total + value, 0),
+    tap(x => console.log('Before map: %O', x)),
+    map(([,, c]) => c * 2),
+    tap(x => console.log('After map: %d', x)),
+    filter(x => x > 2),
+    scan((total, value) => total + value, 0),
   )
   .subscribe(
     console.log,
