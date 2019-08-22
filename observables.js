@@ -49,16 +49,16 @@ const zip = (...streams$) =>
       .fill()
       .map(() => []);
 
-    const isWaveFull = () =>
+    const isWaveReady = () =>
       itemBuckets.every(
-        bucket => bucket[itemIndex] !== undefined,
+        bucket => bucket.length - 1 >= itemIndex,
       );
 
     streams$.forEach((stream$, i) => {
       const next = v => {
         itemBuckets[i].push(v);
 
-        if (isWaveFull()) {
+        if (isWaveReady()) {
           const fullWave = itemBuckets.reduce(
             (wave, bucket) => [...wave, bucket[itemIndex]],
             [],

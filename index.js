@@ -8,7 +8,7 @@ const {
 } = require('./operators');
 
 zip(
-  of('a', 'b', 'c'),
+  of('a', undefined, 'c'),
   interval(250, 3),
   of(1, 2, 3, 4)
 )
